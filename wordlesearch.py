@@ -20,7 +20,7 @@ class DictComp:
         elif comp_type == 'max_orange':
             return self.comparison_orange(l_cand)
         else:
-            Raise ValueError('Comparison type not recognised.')
+            raise ValueError('Comparison type not recognised.')
     def comparison_modal(self, l_cand):
         return self.comparison_over_list(l_cand, 
                                          most_common_match, 

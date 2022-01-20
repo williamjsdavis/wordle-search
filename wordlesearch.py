@@ -2,9 +2,6 @@ from collections import Counter
 from itertools import compress
 from operator import not_
 
-def hello():
-    print('Hello')
-
 """
 Dictionary comparison
 """

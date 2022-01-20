@@ -11,7 +11,7 @@ Dictionary comparison
 class DictComp:
     def __init__(self, l_dict):
         self.l_dict = l_dict
-    def comparison(self, l_cand):
+    def comparison(self, l_cand, comp_type):
         if comp_type == 'modal':
             return comparison_modal(l_dict, l_cand)
         elif comp_type == 'sum':

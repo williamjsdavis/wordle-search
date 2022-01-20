@@ -58,12 +58,12 @@ class DictComp:
         running_best_dict = {}
         for (i,v) in enumerate(metrics_cand):
             if m_gr(v, running_best_val):
-            # Replace and add
-            running_best_val = v
-            running_best_dict = {l_cand[i] : v}
+                # Replace and add
+                running_best_val = v
+                running_best_dict = {l_cand[i] : v}
             elif m_eq(v, running_best_val):
-            # Add to dict
-            running_best_dict[l_cand[i]] = v
+                # Add to dict
+                running_best_dict[l_cand[i]] = v
         return running_best_dict
 
 # Modal method

@@ -20,7 +20,7 @@ class DictComp:
         elif comp_type == 'max_orange':
             return self.comparison_orange(l_cand)
         else:
-            ValueError('Comparison type not recognised.')
+            Raise ValueError('Comparison type not recognised.')
     def comparison_modal(self, l_cand):
         return self.comparison_over_list(l_cand, 
                                          most_common_match, 
@@ -92,6 +92,26 @@ def mean_match(score_map):
 def combined_score_mean_match(l, s):
     score_map = combined_score_map(l, s)
     return mean_match(score_map)
+
+# Maximise green
+def meanmax_green(score_map):
+    score_list = list(score_map)
+    score_dict = dict(Counter(score_list))
+    green_sum = sum(map(lambda x: x[1]*x[0][0], score_dict.items()))
+    return green_sum/len(score_list)
+def combined_score_meanmax_green(l, s):
+    score_map = combined_score_map(l, s)
+    return meanmax_green(score_map)
+
+# Maximise orange
+def meanmax_orange(score_map):
+    score_list = list(score_map)
+    score_dict = dict(Counter(score_list))
+    orange_sum = sum(map(lambda x: x[1]*x[0][1], score_dict.items()))
+    return orange_sum/len(score_list)
+def combined_score_meanmax_orange(l, s):
+    score_map = combined_score_map(l, s)
+    return meanmax_orange(score_map)
 
 # Score calculator
 def combined_score_map(l, s):

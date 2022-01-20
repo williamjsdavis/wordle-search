@@ -23,29 +23,29 @@ class DictComp:
             ValueError('Comparison type not recognised.')
     def comparison_modal(self, l_cand):
         return self.comparison_over_list(l_cand, 
-                                    most_common_match, 
-                                    lexicographic_equality, 
-                                    lexicographic_greaterthan)
+                                         most_common_match, 
+                                         lexicographic_equality, 
+                                         lexicographic_greaterthan)
     def comparison_sum(self, l_cand):
         return self.comparison_over_list(l_cand, 
-                                    sum_match, 
-                                    sum_equality, 
-                                    sum_greaterthan)
+                                         sum_match, 
+                                         sum_equality, 
+                                         sum_greaterthan)
     def comparison_mean(self, l_cand):
         return self.comparison_over_list(l_cand, 
-                                    mean_match, 
-                                    sum_equality, 
-                                    sum_greaterthan)
+                                         mean_match, 
+                                         sum_equality, 
+                                         sum_greaterthan)
     def comparison_green(self, l_cand):
         return self.comparison_over_list(l_cand, 
-                                    meanmax_green, 
-                                    sum_equality, 
-                                    sum_greaterthan)
+                                         meanmax_green, 
+                                         sum_equality, 
+                                         sum_greaterthan)
     def comparison_orange(self, l_cand):
         return self.comparison_over_list(l_cand, 
-                                    meanmax_orange, 
-                                    sum_equality, 
-                                    sum_greaterthan)
+                                         meanmax_orange, 
+                                         sum_equality, 
+                                         sum_greaterthan)
     def comparison_over_list(self, l_cand, m_comp, m_eq, m_gr):
         scores_cand = map(lambda s: combined_score_map(self.l_dict, s), l_cand)
         metrics_cand = map(m_comp, scores_cand)

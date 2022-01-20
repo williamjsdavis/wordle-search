@@ -13,44 +13,44 @@ class DictComp:
         self.l_dict = l_dict
     def comparison(self, l_cand, comp_type):
         if comp_type == 'modal':
-            return comparison_modal(l_dict, l_cand)
+            return self.comparison_modal(l_cand)
         elif comp_type == 'sum':
-            return comparison_sum(l_dict, l_cand)
+            return self.comparison_sum(l_cand)
         elif comp_type == 'mean':
-            return comparison_mean(l_dict, l_cand)
+            return self.comparison_mean(l_cand)
         elif comp_type == 'max_green':
-            return comparison_green(l_dict, l_cand)
+            return self.comparison_green(l_cand)
         elif comp_type == 'max_orange':
-            return comparison_orange(l_dict, l_cand)
+            return self.comparison_orange(l_cand)
         else:
             ValueError('Comparison type not recognised.')
-    def comparison_modal(self, l_dict, l_cand):
-        return comparison_over_list(l_dict, l_cand, 
+    def comparison_modal(self, l_cand):
+        return self.comparison_over_list(l_cand, 
                                     most_common_match, 
                                     lexicographic_equality, 
                                     lexicographic_greaterthan)
-    def comparison_sum(self, l_dict, l_cand):
-        return comparison_over_list(l_dict, l_cand, 
+    def comparison_sum(self, l_cand):
+        return self.comparison_over_list(l_cand, 
                                     sum_match, 
                                     sum_equality, 
                                     sum_greaterthan)
-    def comparison_mean(self, l_dict, l_cand):
-        return comparison_over_list(l_dict, l_cand, 
+    def comparison_mean(self, l_cand):
+        return self.comparison_over_list(l_cand, 
                                     mean_match, 
                                     sum_equality, 
                                     sum_greaterthan)
-    def comparison_green(self, l_dict, l_cand):
-        return comparison_over_list(l_dict, l_cand, 
+    def comparison_green(self, l_cand):
+        return self.comparison_over_list(l_cand, 
                                     meanmax_green, 
                                     sum_equality, 
                                     sum_greaterthan)
-    def comparison_orange(self, l_dict, l_cand):
-        return comparison_over_list(l_dict, l_cand, 
+    def comparison_orange(self, l_cand):
+        return self.comparison_over_list(l_cand, 
                                     meanmax_orange, 
                                     sum_equality, 
                                     sum_greaterthan)
-    def comparison_over_list(self, l_dict, l_cand, m_comp, m_eq, m_gr):
-        scores_cand = map(lambda s: combined_score_map(l_dict, s), l_cand)
+    def comparison_over_list(self, l_cand, m_comp, m_eq, m_gr):
+        scores_cand = map(lambda s: combined_score_map(self.l_dict, s), l_cand)
         metrics_cand = map(m_comp, scores_cand)
         metrics_cand = list(metrics_cand)
         

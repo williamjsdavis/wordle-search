@@ -10,11 +10,11 @@ class DictComp:
         self.l_dict = l_dict
     def find_best(self, l_cand, comp_type):
         func = self.comparison_over_list
-        return self.comparison(l_cand, func)
+        return self.comparison(l_cand, comp_type, func)
     def top_n(self, l_cand, comp_type, n):
         func = self.comparison_over_list_topn
-        return self.comparison(l_cand, func)
-    def comparison(self, l_cand, func):
+        return self.comparison(l_cand, comp_type, func)
+    def comparison(self, l_cand, comp_type, func):
         if comp_type == 'modal':
             return func(l_cand, 
                         most_common_match, 

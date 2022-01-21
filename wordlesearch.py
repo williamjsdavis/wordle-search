@@ -76,7 +76,7 @@ class DictComp:
             elif m_eq(v, running_best_val):
                 # Add to dict
                 n_best.append((l_cand[i], v))
-        return n_best[0:n-1]
+        return n_best[0:n]
 
 # Modal method
 def most_common_match(score_map):

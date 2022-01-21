@@ -69,13 +69,7 @@ class DictComp:
         running_best_val = metrics_cand[0]
         n_best = []
         for (i,v) in enumerate(metrics_cand):
-            if m_gr(v, running_best_val):
-                # Replace and add
-                running_best_val = v
-                n_best.insert(0, (l_cand[i], v))
-            elif m_eq(v, running_best_val):
-                # Add to dict
-                n_best.insert(0, (l_cand[i], v))
+            n_best.insert(0, (l_cand[i], v))
         return n_best[0:n]
 
 # Modal method

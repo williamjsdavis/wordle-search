@@ -12,7 +12,10 @@ class DictComp:
         func = self.comparison_over_list
         return self.comparison(l_cand, comp_type, func)
     def top_n(self, l_cand, comp_type, n):
-        func = self.comparison_over_list_topn
+        func = lambda l_arg, m_comp, m_eq, m_gr:\
+                    self.comparison_over_list_topn(
+                        l_arg, m_comp, m_eq, m_gr, n
+                    )
         return self.comparison(l_cand, comp_type, func)
     def comparison(self, l_cand, comp_type, func):
         if comp_type == 'modal':

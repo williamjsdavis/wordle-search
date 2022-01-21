@@ -8,44 +8,40 @@ Dictionary comparison
 class DictComp:
     def __init__(self, l_dict):
         self.l_dict = l_dict
-    def comparison(self, l_cand, comp_type):
+    def find_best(self, l_cand, comp_type):
+        func = self.comparison_over_list
+        return self.comparison(l_cand, func)
+    def top_n(self, l_cand, comp_type, n):
+        func = self.comparison_over_list_topn
+        return self.comparison(l_cand, func)
+    def comparison(self, l_cand, func):
         if comp_type == 'modal':
-            return self.comparison_modal(l_cand)
+            return func(l_cand, 
+                        most_common_match, 
+                        lexicographic_equality, 
+                        lexicographic_greaterthan)
         elif comp_type == 'sum':
-            return self.comparison_sum(l_cand)
+            return func(l_cand, 
+                        sum_match, 
+                        sum_equality, 
+                        sum_greaterthan)
         elif comp_type == 'mean':
-            return self.comparison_mean(l_cand)
+            return func(l_cand, 
+                        mean_match, 
+                        sum_equality, 
+                        sum_greaterthan)
         elif comp_type == 'max_green':
-            return self.comparison_green(l_cand)
+            return func(l_cand, 
+                        meanmax_green, 
+                        sum_equality, 
+                        sum_greaterthan)
         elif comp_type == 'max_orange':
-            return self.comparison_orange(l_cand)
+            return func(l_cand, 
+                        meanmax_orange, 
+                        sum_equality, 
+                        sum_greaterthan)
         else:
             raise ValueError('Comparison type not recognised.')
-    def comparison_modal(self, l_cand):
-        return self.comparison_over_list(l_cand, 
-                                         most_common_match, 
-                                         lexicographic_equality, 
-                                         lexicographic_greaterthan)
-    def comparison_sum(self, l_cand):
-        return self.comparison_over_list(l_cand, 
-                                         sum_match, 
-                                         sum_equality, 
-                                         sum_greaterthan)
-    def comparison_mean(self, l_cand):
-        return self.comparison_over_list(l_cand, 
-                                         mean_match, 
-                                         sum_equality, 
-                                         sum_greaterthan)
-    def comparison_green(self, l_cand):
-        return self.comparison_over_list(l_cand, 
-                                         meanmax_green, 
-                                         sum_equality, 
-                                         sum_greaterthan)
-    def comparison_orange(self, l_cand):
-        return self.comparison_over_list(l_cand, 
-                                         meanmax_orange, 
-                                         sum_equality, 
-                                         sum_greaterthan)
     def comparison_over_list(self, l_cand, m_comp, m_eq, m_gr):
         scores_cand = map(lambda s: combined_score_map(self.l_dict, s), l_cand)
         metrics_cand = map(m_comp, scores_cand)
@@ -62,6 +58,22 @@ class DictComp:
                 # Add to dict
                 running_best_dict[l_cand[i]] = v
         return running_best_dict
+    def comparison_over_list_topn(self, l_cand, m_comp, m_eq, m_gr, n):
+        scores_cand = map(lambda s: combined_score_map(self.l_dict, s), l_cand)
+        metrics_cand = map(m_comp, scores_cand)
+        metrics_cand = list(metrics_cand)
+        
+        running_best_val = metrics_cand[0]
+        n_best = []
+        for (i,v) in enumerate(metrics_cand):
+            if m_gr(v, running_best_val):
+                # Replace and add
+                running_best_val = v
+                n_best.append((l_cand[i], v))
+            elif m_eq(v, running_best_val):
+                # Add to dict
+                n_best.append((l_cand[i], v))
+        return n_best[0:n-1]
 
 # Modal method
 def most_common_match(score_map):

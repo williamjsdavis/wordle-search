@@ -69,7 +69,8 @@ class DictComp:
         running_best_val = metrics_cand[0]
         n_best = []
         for (i,v) in enumerate(metrics_cand):
-            n_best.insert(0, (l_cand[i], v))
+            n_best.append((l_cand[i], v))
+        n_best.sort(key=lambda x: x[1], reverse=True)
         return n_best[0:n]
 
 # Modal method
